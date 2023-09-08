@@ -12,14 +12,17 @@ const userData = {
 }
 
 
-const assignData = (data, options, element) =>{
-    userData.data = data;
-    Object.keys(userData.options).forEach(function(key){
-        userData.options[key] = options[key];
-    });
-}
+// const assignData = () =>{
+//     userData.data = data;
+//     Object.keys(userData.options).forEach(function(key){
+//         userData.options[key] = $("#"+key).val();
+//     });
+// }
 
-$("#enterData").click(function(data, options, element){
-    assignData(data,options, element);
-})
+const assignData = () =>{
+    let word = "data"
+    let test = $("#data").val();
+    console.log(test);
+}
+$("#submit").click(assignData());
 
