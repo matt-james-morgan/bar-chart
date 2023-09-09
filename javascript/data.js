@@ -19,8 +19,18 @@ const userData = {
 //     });
 // }
 
+const checkInput = (data) =>{
+    return true;
+}
+
 const assignData = () =>{
-     = $("#data").val();
+    let data = $("#data").val().replace(/\s/g,'').split(',');
+    
+    try {
+       checkInput(data); 
+    } catch (error) {
+        
+    }
     
 }
 
