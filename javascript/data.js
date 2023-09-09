@@ -20,9 +20,9 @@ const userData = {
 // }
 
 const assignData = () =>{
-    let word = "data"
-    let test = $("#data").val();
-    console.log(test);
+     = $("#data").val();
+    
 }
-$("#submit").click(assignData());
+
+$("#submit").click(()=>assignData());
 
