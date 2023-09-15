@@ -40,25 +40,18 @@ const assignColor = () => {
         $("#assign-color").append(input);
     }
     const button = document.createElement("button");
+    button.innerHTML = ("Submit");
     Object.assign(button, {
         id: 'submit-color',
+        value: "submit",
         onclick: function(){
             for(let i =0; i < userData.data.length; i++){
-                userData.color.push($())
+                userData.color.push($("#" + i).val());
             }
         }
-    })
-    $('assign-color').append(button);
+    });
+    $('#assign-color').append(button);
 }
-
-
-
-
-
-
-
-
-
 
 
 $("#submit").click(() => {
@@ -67,6 +60,14 @@ $("#submit").click(() => {
     assignColor();
     console.log(userData);
 });
+
+$("#submit").click(() => {
+    console.log('hey')
+    assignData();
+    assignColor();
+    console.log(userData);
+});
+
 
 
 
