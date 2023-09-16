@@ -1,4 +1,9 @@
-const userData = {
+
+const uuidv4 = require("uuid/v4");
+
+let userData = {
+    color:[],
+    barLabel:[]
 }
 
 
@@ -24,15 +29,16 @@ const assignData = () => {
     userData.data = data;
 }
 
+const genreateDropdownMenu = () =>{
+
+}
+
 
 
 const assignColor = () => {
     const colorOptions = ["blue", "red", "green"];
 
     $('#enter-data').hide();
-
-    userData.color = [];
-
     $('#submit').hide();
 
     for (let i = 0; i < userData.data.length; i++) {
@@ -64,7 +70,6 @@ const assignColor = () => {
             id: "dropdown-" + i,
             onclick: function () {
                 $("#color-drop-"+i).toggle();
-                 
             }
         });
 
@@ -79,8 +84,10 @@ const assignColor = () => {
         colorDiv.append(input);
         colorDiv.append(dropdown);
         colorDiv.append(ul);
+        
         $('#assign-color').append(colorDiv);
     }
+
     const button = document.createElement("button");
 
     button.innerHTML = ("Submit");
@@ -92,23 +99,40 @@ const assignColor = () => {
             for (let i = 0; i < userData.data.length; i++) {
                 userData.color.push($("#" + i).val());
             }
+            console.log(userData);
         }
     });
 
     $('#assign-color').append(button);
 }
 
+const assignLabels = () =>{
+
+    assignColor.hide();
+    const labelDiv = document.createElement('div');
+    const labelColor = document.createElement('input');
+    const inputBarLabelName = document.createElement('input');
+        Object.assign(inputBarLabelName,{
+            placeholder: 'Enter Bar Name',
+            id: 'barLabel' + i
+    });
+
+    for(let i =0; i< userData.data.length; i++){
+
+    }
+
+
+}
 
 $("#submit").click(() => {
     console.log('hey')
     assignData();
     assignColor();
+    assignLabels();
     console.log(userData);
 });
 
-$("#submit-color").click(() => {
-    
-});
+
 
 
 
