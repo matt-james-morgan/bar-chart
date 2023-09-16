@@ -1,6 +1,8 @@
-#dropdown {
+.dropdown-items {
     display: none;
 }
+
+
 
 #dropdown a{
     text-decoration: none;

@@ -27,29 +27,74 @@ const assignData = () => {
 
 
 const assignColor = () => {
+    const colorOptions = ["blue", "red", "green"];
+
     $('#enter-data').hide();
+
     userData.color = [];
+
     $('#submit').hide();
-    for(let i = 0; i<userData.data.length; i++){
+
+    for (let i = 0; i < userData.data.length; i++) {
+        const colorDiv = document.createElement('div');
         const input = document.createElement('input');
         const count = document.createElement('p');
-        count.innerHTML=(i+1);
-        input.setAttribute('placeholder', 'enter color');
-        input.setAttribute("id", i);
-        $("#assign-color").append(count);
-        $("#assign-color").append(input);
+        count.innerHTML = (i + 1);
+        const dropdown = document.createElement('button');
+        const ul = document.createElement('ul');
+
+        Object.assign(ul,{
+            id:"color-drop-" + i,
+            class: 'dropdown-items'
+        })
+        for (let val of colorOptions) {
+            var li = document.createElement('li'); // Create <li> element
+            li.innerHTML = val; // Set its innerHTML to the color
+            Object.assign(li,{
+                onclick: function(){
+                    input.value = val;
+                }
+            })
+            ul.appendChild(li); // Append it to the <ul>
+        }
+
+        
+
+        Object.assign(dropdown, {
+            id: "dropdown-" + i,
+            onclick: function () {
+                $("#color-drop-"+i).toggle();
+                 
+            }
+        });
+
+        
+        Object.assign(input, {
+            placeholder: "enter color",
+            id: i
+        });
+
+        ul.style.display = 'none'
+        colorDiv.append(count);
+        colorDiv.append(input);
+        colorDiv.append(dropdown);
+        colorDiv.append(ul);
+        $('#assign-color').append(colorDiv);
     }
     const button = document.createElement("button");
+
     button.innerHTML = ("Submit");
+
     Object.assign(button, {
         id: 'submit-color',
         value: "submit",
-        onclick: function(){
-            for(let i =0; i < userData.data.length; i++){
+        onclick: function () {
+            for (let i = 0; i < userData.data.length; i++) {
                 userData.color.push($("#" + i).val());
             }
         }
     });
+
     $('#assign-color').append(button);
 }
 
@@ -61,11 +106,8 @@ $("#submit").click(() => {
     console.log(userData);
 });
 
-$("#submit").click(() => {
-    console.log('hey')
-    assignData();
-    assignColor();
-    console.log(userData);
+$("#submit-color").click(() => {
+    
 });
 
 
