@@ -7,7 +7,15 @@ let userData = {
 }
 
 
+const barColorOptions = {
+    name: 'barColorOptions',
+    dropDown:["blue", "red", "green"]
+};
 
+const labelColorOptions = {
+    name: 'labelColorOptions',
+    dropDown: ['orange,black,white']
+}
 
 
 const checkDataForString = (data) => {
@@ -29,61 +37,65 @@ const assignData = () => {
     userData.data = data;
 }
 
-const genreateDropdownMenu = () =>{
+const genreateDropdownMenu = (options) =>{
+    const div = document.createElement('div');
+    for(let i = 0; i<options.;i++){
+        const count = document.createElement('p');
+        count.innerHTML = (i + 1);
+        const ul = document.createElement('ul');
+        const button = document.createElement('button');
+        const input = document.createElement('input');
 
+        Object.assign(input, {
+            placeholder: "enter color",
+            id: options.name + '-' + i
+        });
+
+        
+
+        Object.assign(button,{
+            onclick: function(){
+            $(options.name + '-' + i).toggle(); 
+            }
+        })//gives function to each dropdown menu button and targets corresponding ul
+
+        for(let val of options.dropDown){//generates the dropdown menu options
+            const li = document.createElement('li');
+            li.innerHTML = val; 
+            Object.assign(li, {
+                onclick: function(){
+                    input.value = val; //assigns the input field to the val
+                }
+            })
+            ul.appendChild(li);
+        }
+        ul.style.display = 'none'
+        div.append(count);
+        div.append(input);
+        div.append(dropdown);
+        div.append(ul);
+    }
+    
+   return div;
+    
 }
 
 
 
 const assignColor = () => {
-    const colorOptions = ["blue", "red", "green"];
+    
 
     $('#enter-data').hide();
     $('#submit').hide();
 
     for (let i = 0; i < userData.data.length; i++) {
-        const colorDiv = document.createElement('div');
-        const input = document.createElement('input');
-        const count = document.createElement('p');
-        count.innerHTML = (i + 1);
-        const dropdown = document.createElement('button');
-        const ul = document.createElement('ul');
-
-        Object.assign(ul,{
-            id:"color-drop-" + i,
-            class: 'dropdown-items'
-        })
-        for (let val of colorOptions) {
-            var li = document.createElement('li'); // Create <li> element
-            li.innerHTML = val; // Set its innerHTML to the color
-            Object.assign(li,{
-                onclick: function(){
-                    input.value = val;
-                }
-            })
-            ul.appendChild(li); // Append it to the <ul>
-        }
-
+        
+        
+        
+        const colorDiv = genreateDropdownMenu()
         
 
-        Object.assign(dropdown, {
-            id: "dropdown-" + i,
-            onclick: function () {
-                $("#color-drop-"+i).toggle();
-            }
-        });
-
         
-        Object.assign(input, {
-            placeholder: "enter color",
-            id: i
-        });
-
-        ul.style.display = 'none'
-        colorDiv.append(count);
-        colorDiv.append(input);
-        colorDiv.append(dropdown);
-        colorDiv.append(ul);
         
         $('#assign-color').append(colorDiv);
     }
