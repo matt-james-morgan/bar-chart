@@ -1,20 +1,20 @@
-
-
-
 let userData = {
-    color:[],
-    barLabel:[]
+    color: [],
+    barLabelColor: [],
+    barLabelName: []
 }
 
 
 const barColorOptions = {
     name: 'barColorOptions',
-    dropDown:["blue", "red", "green"]
+    placeholderName: 'bar',
+    dropDown: ["blue", "red", "green"]
 };
 
 const labelColorOptions = {
     name: 'labelColorOptions',
-    dropDown: ['orange,black,white']
+    placeholderName: 'bar label',
+    dropDown: ['orange', 'black', 'white']
 }
 
 
@@ -26,6 +26,7 @@ const assignData = () => {
     let data = $("#data").val().replace(/\s/g, '').split(',').map((x) => {
         return parseInt(x);
     });
+
     try {
         if (!checkDataForString(data)) {
             throw new Error('Non-numeric values found in data');
@@ -37,68 +38,70 @@ const assignData = () => {
     userData.data = data;
 }
 
-const genreateDropdownMenu = (options) =>{
+const genreateDropdownMenu = (numOfBars, options) => {
+   
     const div = document.createElement('div');
-    for(let i = 0; i<options.;i++){
+    
+    
+    for (let i = 0; i < numOfBars.length; i++) {
+        const inputDiv = document.createElement('div');
+        inputDiv.id =  "labelDiv-"+ i;
+        
         const count = document.createElement('p');
         count.innerHTML = (i + 1);
+
         const ul = document.createElement('ul');
+        ul.style.display = 'none';
+        ul.id = options.name + '-' + i;
+
         const button = document.createElement('button');
+        button.onclick = function () {
+            $("#" + options.name + '-' + i).toggle();
+        }
+
         const input = document.createElement('input');
-
-        Object.assign(input, {
-            placeholder: "enter color",
-            id: options.name + '-' + i
-        });
-
+        input.placeholder = "enter "+ options.placeholderName + " color";
+        inputDiv.append(input);
+        if(options.name === 'labelColorOptions'){
+            const labelName = document.createElement("input");
+            labelName.id = "labelName" + i; 
+            labelName.placeholder = "enter label name";
+            inputDiv.append(labelName);
+        }
         
-
-        Object.assign(button,{
-            onclick: function(){
-            $(options.name + '-' + i).toggle(); 
-            }
-        })//gives function to each dropdown menu button and targets corresponding ul
-
-        for(let val of options.dropDown){//generates the dropdown menu options
+        for (let val of options.dropDown) {//generates the dropdown menu options
             const li = document.createElement('li');
-            li.innerHTML = val; 
+            li.innerHTML = val;
             Object.assign(li, {
-                onclick: function(){
+                onclick: function () {
                     input.value = val; //assigns the input field to the val
                 }
             })
             ul.appendChild(li);
         }
-        ul.style.display = 'none'
+
         div.append(count);
-        div.append(input);
-        div.append(dropdown);
+        div.append(inputDiv);
+        div.append(button);
         div.append(ul);
     }
-    
-   return div;
-    
+
+    return div;
+
 }
 
 
 
 const assignColor = () => {
-    
 
     $('#enter-data').hide();
     $('#submit').hide();
 
-    for (let i = 0; i < userData.data.length; i++) {
-        
-        
-        
-        const colorDiv = genreateDropdownMenu()
-        
 
-        
-        
-        $('#assign-color').append(colorDiv);
-    }
+    const colorDiv = genreateDropdownMenu(userData.data, barColorOptions);
+   
+
+    $('#assign-color').append(colorDiv);
 
     const button = document.createElement("button");
 
@@ -109,38 +112,54 @@ const assignColor = () => {
         value: "submit",
         onclick: function () {
             for (let i = 0; i < userData.data.length; i++) {
-                userData.color.push($("#" + i).val());
+                userData.color.push($("#user-input-" + i).val())
             }
-            console.log(userData);
+            assignLabels();
         }
     });
 
     $('#assign-color').append(button);
 }
 
-const assignLabels = () =>{
+const assignLabels = () => {
 
-    assignColor.hide();
-    const labelDiv = document.createElement('div');
-    const labelColor = document.createElement('input');
-    const inputBarLabelName = document.createElement('input');
-        Object.assign(inputBarLabelName,{
-            placeholder: 'Enter Bar Name',
-            id: 'barLabel' + i
+    $("#assign-color").hide();
+
+
+    const labelDiv = genreateDropdownMenu(userData.data, labelColorOptions);
+
+    $('#assign-label').append(labelDiv);
+
+
+
+
+
+    const button = document.createElement("button");
+
+    button.innerHTML = ("Submit");
+
+    Object.assign(button, {
+        id: 'submit-label',
+        value: "submit",
+        onclick: function () {
+            for (let i = 0; i < userData.data.length; i++) {
+                userData.barLabelColor.push($("#user-input-" + i).val())
+                userData.barLabelName.push($("#labelName"+i).val());
+            }
+            console.log(userData);
+        }
     });
 
-    for(let i =0; i< userData.data.length; i++){
-
-    }
-
-
+    
+    $('#assign-label').append(button);
 }
 
+
+
+
 $("#submit").click(() => {
-    console.log('hey')
     assignData();
     assignColor();
-    assignLabels();
     console.log(userData);
 });
 
