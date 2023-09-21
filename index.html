@@ -13,22 +13,48 @@
         <h1>Data Visualization</h1>
     </header>
     <nav>
+        <div id="chart-name-div">
+            <form class="chart-title-input">
+                <Label>Graph Name
+                    <input type="text" id="graph-title" required>
+                </Label>
+                <label for="">Graph Title Color
+                    <input type="color" id="title-color">
+                </label>
+                <label>Graph Title Font Size
+                    <select id="graph-title-size" name="Graph-title-size">
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="24">24</option>
+                        <option value="26">26</option>
+                        <option value="28">28</option>
+                    </select>
+                </label>
+                <input type="submit" id="chart-name-submit">
+            </form>
+            
+            
+        </div>
         <div id="enter-data">
-            <h2>Instructions</h2>
             <p>Enter values seperated by comma</p>
             <input type="text" placeholder="data" id="data">
-            <input type="text" value="font-size">
+            <input type="submit" id="data-submit">
         </div>
         
         
         <div id="assign-color">
             
         </div>
+
         <div id="assign-label">
 
         </div>
 
-        <button value="submit" id="submit">Submit</button>
     </nav>
     <div class = "graphs">
         <p id="test">graph go here eventually</p>

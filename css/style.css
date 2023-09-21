@@ -1,7 +1,15 @@
 .dropdown-items {
     display: none;
 }
+.chart-title-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+#enter-data{
+    display: none;
+}
 
 
 #dropdown a{
