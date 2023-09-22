@@ -6,7 +6,9 @@
     justify-content: center;
     align-items: center;
 }
-
+#assign-bar-color{
+    display: none;
+}
 #enter-data{
     display: none;
 }

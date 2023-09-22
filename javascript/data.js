@@ -1,7 +1,9 @@
 let graphData = {
     color: [],
     barLabelColor: [],
-    barLabelName: []
+    barLabelName: [],
+    barColor: [],
+    barName: []
 }
 
 const checkDataForString = (data) => {
@@ -42,10 +44,15 @@ const generateBarColorInput = () =>{
 
     graphData.data.map((x, i)=>{//mapping each piece of data to generate new color option for each bar
         const label = document.createElement('label');
-        const input = document.createElement('input');
+        const barColor = document.createElement('input');
+        const barName = document.createElement('input');
         label.innerHTML = 'Bar ' + (i+1);
-        input.type = 'color';
-        div.append(label, input);
+        barName.type = "text";
+        barName.placeholder = "Bar Name";
+        barName.id = "bar-name-" + i;
+        barColor.type = 'color';
+        barColor.id = "bar-color-"+i;
+        div.append(label, barName, barColor);
     });
 
     $("#assign-bar-color").append(div);
@@ -66,22 +73,15 @@ $("#data-submit").click((e)=>{
     } 
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$("#bar-color-submit").click(()=>{
+    for(let i = 0; i < graphData.data; i++){
+        graphData.barColor.push($('#bar-color-'+i));
+        graphData.barName.push($('#bar-name-'+i));
+        console.log(graphData.barName[i]);
+        if(!graphData.barName[i]){
+            e.preventDefault();
+            alert('Please fill out form');
+        }
+    }
+    $("#bar-color-submit").hide();
+});
