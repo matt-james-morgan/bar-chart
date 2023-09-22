@@ -37,7 +37,7 @@ $("#chart-name-submit").click((e)=>{
         $("#chart-name-div").hide();
         $("#enter-data").show();
     } 
-})
+});
 
 const generateBarColorInput = () =>{
     const div = document.createElement('div');
@@ -56,11 +56,12 @@ const generateBarColorInput = () =>{
     });
 
     $("#assign-bar-color").append(div);
-}
+};
 
 
 $("#data-submit").click((e)=>{
     graphData.data = $("#data").val();
+    console.log(graphData.data)
     if(!graphData.data){
         e.preventDefault();
         alert('Please fill out form');
@@ -71,17 +72,18 @@ $("#data-submit").click((e)=>{
         generateBarColorInput();
         $("#assign-bar-color").show();
     } 
-})
+});
 
-$("#bar-color-submit").click(()=>{
-    for(let i = 0; i < graphData.data; i++){
-        graphData.barColor.push($('#bar-color-'+i));
-        graphData.barName.push($('#bar-name-'+i));
-        console.log(graphData.barName[i]);
-        if(!graphData.barName[i]){
+$("#bar-color-submit").click((e)=>{
+    for(let i = 0; i < graphData.data.length; i++){
+        if(!$('#bar-name-'+i).val()){
             e.preventDefault();
             alert('Please fill out form');
-        }
+            break;
+        }else{
+            graphData.barColor.push($('#bar-color-'+i).val());
+            graphData.barName.push($('#bar-name-'+i).val());
+            console.log(graphData.barName);
+        }  
     }
-    $("#bar-color-submit").hide();
 });
