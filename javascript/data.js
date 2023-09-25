@@ -31,6 +31,16 @@ const assignData =  (callback) => {
     
 }
 
+const drawBarGraph = (graphData, element) => {
+    const sortedData = graphData.data.sort();
+    if(sortedData[sortedData.length-1] <= 10){
+        $("#y-axis").html(sortedData[graphData.data.length-1]);
+    }else if(sortedData[sortedData.length-1] <= 900){
+        $("#y-axis").html(Math.round(sortedData[graphData.data.length-1]/100)*100);
+    }
+    
+    
+}
 
 //on click event to assign values to Graph Data object 
 $("#chart-name-submit").click((e) => {
@@ -81,9 +91,6 @@ $("#data-submit").click( (e) => {
         $("#assign-bar-color").show();
         
     });
-
-    
-
 });
 
 
@@ -101,6 +108,15 @@ $("#data-submit").click( (e) => {
             $("#assign-gap").show();
         }
     }
-    
-    
  });
+
+ $("#gap-submit").click(()=>{
+    if(!$("#gap-input").val()){
+        e.preventDefault();
+        alert('Please select option');
+    }else{
+        graphData.barGap = $("#gap-input").val();
+        $("#assign-gap").hide();
+        drawBarGraph(graphData, $("#graph"));
+    }
+ })

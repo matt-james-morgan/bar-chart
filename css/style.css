@@ -21,3 +21,8 @@
     text-decoration: none;
     display: block;
 }
+
+#graph{
+    display: grid;
+    height: 100%;
+}
