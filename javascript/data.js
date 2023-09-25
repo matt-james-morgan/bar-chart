@@ -32,8 +32,6 @@ const assignData =  (callback) => {
 }
 
 
-
-
 //on click event to assign values to Graph Data object 
 $("#chart-name-submit").click((e) => {
     graphData.title = $("#graph-title").val();
@@ -51,7 +49,9 @@ $("#chart-name-submit").click((e) => {
 
 const generateBarColorInput = () => {
     const div = document.createElement('div');
-
+    const input = document.createElement('input');
+    input.type = "submit";
+    input.id = "bar-color-submit";
     graphData.data.map((x, i) => {//mapping each piece of data to generate new color option for each bar
         const label = document.createElement('label');
         const barColor = document.createElement('input');
@@ -65,7 +65,10 @@ const generateBarColorInput = () => {
         div.append(label, barName, barColor);
     });
 
+  
+   
     $("#assign-bar-color").append(div);
+    $('#assign-bar-color').append(input)
 };
 
 
@@ -76,13 +79,16 @@ $("#data-submit").click( (e) => {
         $("#enter-data").hide();
         generateBarColorInput();
         $("#assign-bar-color").show();
+        
     });
 
     
 
 });
 
-$("#bar-color-submit").click((e) => {
+
+ $(document).on("click", "#bar-color-submit", (e) => {
+    
     for (let i = 0; i < graphData.data.length; i++) {
         if (!$('#bar-name-' + i).val()) {
             e.preventDefault();
@@ -91,7 +97,10 @@ $("#bar-color-submit").click((e) => {
         } else {
             graphData.barColor.push($('#bar-color-' + i).val());
             graphData.barName.push($('#bar-name-' + i).val());
-            console.log(graphData.barName);
+            $("#assign-bar-color").hide();
+            $("#assign-gap").show();
         }
     }
-});
+    
+    
+ });

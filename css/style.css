@@ -13,6 +13,9 @@
     display: none;
 }
 
+#assign-gap{
+    display: none;
+}
 
 #dropdown a{
     text-decoration: none;
