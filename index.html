@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar Chart</title>
     <link rel="stylesheet" href="./css/style.css">
-    
+
 
 </head>
 <body>
@@ -35,33 +35,71 @@
                         <option value="28">28</option>
                     </select>
                 </label>
-                <input type="submit" id="chart-name-submit">
+
             </form>
-            
-            
+
+
         </div>
+
         <div id="enter-data">
-            <p>Enter values seperated by comma</p>
-            <input type="text" placeholder="data" id="data">
-            <input type="submit" id="data-submit">
+          <div>
+            <h2>Add Another Bar</h2>
+            <button id="addBar">+</button>
+          </div>
+          <p><em>Numbers are in percentage</em></p>
+            <div class="bar-input">
+              <p>Enter Bar Value</p>
+              <input type="number" min="1" max="100">
+              <p>Enter Bar Name and Color</p>
+              <input type="text" placeholder="Bar Label">
+              <input type="color">
+              <p>Enter Bar Label Color</p>
+              <input type="color">
+            </div>
         </div>
-        
-        
-        <div id="assign-bar-color">
-           
-        </div>
+
+
+
 
         <div id="assign-gap">
             <p>Enter percetage for bar gap</p>
             <input type="number" min="1" max="20" id="gap-input">
-            <input type="submit" id="gap-submit">
-        </div>
 
+        </div>
+        <input type="submit" id="submit">
     </nav>
     <div id = "graph">
-        <div id="y-axis"></div>
+        <div id="y-axis">
+          <p>100</p>
+          <p>90</p>
+          <p>80</p>
+          <p>70</p>
+          <p>60</p>
+          <p>50</p>
+          <p>40</p>
+          <p>30</p>
+          <p>20</p>
+          <p>10</p>
+          <p>0</p>
+        </div>
+        <div>
+
+        </div>
+        <div id="x-axis">
+          <p>0</p>
+          <p>10</p>
+          <p>20</p>
+          <p>30</p>
+          <p>40</p>
+          <p>50</p>
+          <p>60</p>
+          <p>70</p>
+          <p>80</p>
+          <p>90</p>
+          <p>100</p>
+        </div>
     </div>
-   
+
 </body>
 <script
     src="https://code.jquery.com/jquery-3.7.1.min.js"
