@@ -5,31 +5,37 @@
     align-items: center;
 }
 
-#x-axis{
 
 
 
-  grid-column: 1;
-  grid-row: 0;
-}
 
-p{
-  display: inline;
-}
 
 
 #dropdown a{
     text-decoration: none;
     display: block;
 }
-
-#graph{
-    display: grid;
-    height: 100%;
-    grid-template-columns: auto;
+#graph {
+  display: none;
+  grid-template-columns: 1fr 9fr;
+  grid-template-rows: auto 1fr 1fr;
 }
 
-#y-axis{
-  display: grid;
+#x-axis{
+  grid-column-start: span 2;
 
+}
+#y-axis{
+  flex-direction: column;
+}
+
+#x-axis, #y-axis{
+  display: flex;
+  justify-content: space-around;
+}
+
+#graph h2{
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
 }

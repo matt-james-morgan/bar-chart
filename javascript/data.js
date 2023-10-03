@@ -3,7 +3,8 @@ let graphData = {
     barLabelName: [],
     barColor: [],
     barName: [],
-    data: []
+    data: [],
+
 }
 
 let barCountId = 1;
@@ -55,6 +56,21 @@ $("#addBar").click(()=>{
         div.append(container);
 })
 
+const drawBarGraph = (graphData, element) => {
+  $("#graph").css("display","grid");
+
+  const graphTitle = document.createElement("h2");
+  graphTitle.innerHTML = graphData.graphTitle;
+  graphTitle.style.fontSize = graphData.graphTitleSize+"px";
+  graphTitle.style.color = graphData.titleColor;
+  $("#graph").prepend(graphTitle);
+
+  for(let i = 0; i < graphData.data.length; i++){
+    const bar = document.createElement()
+  }
+
+}
+
 $("nav").on("click", "#submit", ()=>{
   const bars = $(".bar-input");
   bars.each(function(){
@@ -66,7 +82,9 @@ $("nav").on("click", "#submit", ()=>{
   graphData.graphTitle = $("#graph-title").val();
   graphData.titleColor = $("#title-color").val();
   graphData.graphTitleSize = $("#graph-title-size").val();
-  console.log(graphData);
+  graphData.barGap = $("#gap-input").val();
+  const element = $("#final-graph")[0];
+  drawBarGraph(graphData, element);
 })
 
 
