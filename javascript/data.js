@@ -67,10 +67,15 @@ const drawBarGraph = (graphData, element) => {
 
   for(let i = 0; i < graphData.data.length; i++){
     const bar = document.createElement('div');
-    console.log(graphData.data[i]);
+    const label = document.createElement('p');
+    label.innerHTML = graphData.barLabelName[i];
     bar.style.height = graphData.data[i] + "%";
     bar.style.backgroundColor = graphData.barColor[i];
+    bar.style.display = "flex";
+    bar.style.justifyContent = 'center';
+    bar.appendChild(label);
     finalGraph.appendChild(bar);
+
   }
 
   finalGraph.style.gap = graphData.barGap + "%";
