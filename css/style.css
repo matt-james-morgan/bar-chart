@@ -6,7 +6,10 @@
 }
 
 
-
+header{
+  display: flex;
+  justify-content: center;
+}
 
 
 
@@ -23,14 +26,15 @@
 
 #x-axis{
   grid-column-start: span 2;
+  display: none;
 
 }
 #y-axis{
   flex-direction: column;
+  display: flex;
 }
 
 #x-axis, #y-axis{
-  display: flex;
   justify-content: space-around;
 }
 
@@ -38,4 +42,15 @@
   grid-column: span 2;
   display: flex;
   justify-content: center;
+
+}
+
+#final-graph{
+  display: flex;
+  margin: 16px 0;
+  flex-direction: row;
+}
+#final-graph div{
+  margin-top: auto;
+  width: 100%;
 }

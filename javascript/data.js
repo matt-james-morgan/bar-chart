@@ -58,7 +58,7 @@ $("#addBar").click(()=>{
 
 const drawBarGraph = (graphData, element) => {
   $("#graph").css("display","grid");
-
+  const finalGraph = document.getElementById("final-graph");
   const graphTitle = document.createElement("h2");
   graphTitle.innerHTML = graphData.graphTitle;
   graphTitle.style.fontSize = graphData.graphTitleSize+"px";
@@ -66,8 +66,14 @@ const drawBarGraph = (graphData, element) => {
   $("#graph").prepend(graphTitle);
 
   for(let i = 0; i < graphData.data.length; i++){
-    const bar = document.createElement()
+    const bar = document.createElement('div');
+    console.log(graphData.data[i]);
+    bar.style.height = graphData.data[i] + "%";
+    bar.style.backgroundColor = graphData.barColor[i];
+    finalGraph.appendChild(bar);
   }
+
+  finalGraph.style.gap = graphData.barGap + "%";
 
 }
 
