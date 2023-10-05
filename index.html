@@ -13,18 +13,19 @@
         <h1>BarBeat Pro: Crafting Graphical Soundscapes</h1>
     </header>
     <nav>
+      <form id="form">
         <div id="chart-name-div">
 
-                <Label>Graph Name
-                    <input type="text" id="graph-title" required>
-                </Label>
 
-                    <div>
-                      <input type="color" id="title-color">
-                      <p>Graph Title Color</p>
-                    </div>
+                <input type="text" id="graph-title" placeholder="Graph Title" required>
+                <div>
+                  <label for="">Graph Title Color:</label>
+                <input type="color" id="title-color">
+                </div>
 
-                
+
+
+
                 <label>Graph Title Font Size
                     <select id="graph-title-size" name="Graph-title-size">
                         <option value="8">8</option>
@@ -45,32 +46,39 @@
 
         </div>
 
-        <div id="enter-data">
-          <div>
-            <h2>Add Another Bar</h2>
-            <button id="addBar">+</button>
-          </div>
-          <p><em>Numbers are in percentage</em></p>
+
+
+
+            <div id="enter-data">
             <div class="bar-input">
-              <p>Enter Bar Value</p>
-              <input type="number" min="1" max="100">
-              <p>Enter Bar Name and Color</p>
+              <label>Bar Value</label>
+              <input type="number" min="1" max="100" required placeholder="1" class="user-data">
+              <p><em>*Bar values are in percentage</em></p>
               <input type="text" placeholder="Bar Label">
               <input type="color">
-              <p>Enter Bar Label Color</p>
+              <label>Enter Bar Label Color</label>
               <input type="color">
+              <p>Enter percetage for bar gap</p>
+              <input type="number" min="1" max="20" id="gap-input">
+
+                <h2>Add Another Bar</h2>
+                <button id="addBar">+</button>
             </div>
-        </div>
+
+
+            </div>
 
 
 
 
-        <div id="assign-gap">
-            <p>Enter percetage for bar gap</p>
-            <input type="number" min="1" max="20" id="gap-input">
 
-        </div>
+
+
+
+
+
         <input type="submit" id="submit">
+      </form>
     </nav>
     <div id = "graph">
         <div id="y-axis">

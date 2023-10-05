@@ -9,7 +9,8 @@ let graphData = {
 
 let barCountId = 1;
 
-$("#addBar").click(()=>{
+$("#addBar").click((e)=>{
+  e.preventDefault();
   const container = document.createElement("div")
   container.setAttribute("class", "bar-input");
   barCountId++;
@@ -21,7 +22,8 @@ $("#addBar").click(()=>{
         input1.setAttribute("type", "number");
         input1.setAttribute("min", "1");
         input1.setAttribute("max", "100");
-        input1.setAttribute("placeholder", "data");
+        input1.setAttribute("placeholder", "1");
+        input1.setAttribute("class", 'user-data')
 
 
 
@@ -82,10 +84,18 @@ const drawBarGraph = (graphData, element) => {
 
 }
 
-$("nav").on("click", "#submit", ()=>{
+$("#form").on("click", "#submit", (e)=>{
+  e.preventDefault();
   const bars = $(".bar-input");
   bars.each(function(){
-     graphData.data.push($(this).find("input[type='number']").val());
+    if($(this).find("input[type=number]").val() > 100){
+      alert('val cant be more than 100');
+    }else{
+      graphData.data.push($(this).find("input[type='number']").val());
+      console.log(graphData.data);
+      console.log(bars)
+    }
+
      graphData.barLabelName.push($(this).find("input[type='text']").val());
      graphData.barColor.push($(this).find("input[type=color]").eq(0).val());
      graphData.barLabelColor.push($(this).find("input[type=color]").eq(1).val());
@@ -95,7 +105,12 @@ $("nav").on("click", "#submit", ()=>{
   graphData.graphTitleSize = $("#graph-title-size").val();
   graphData.barGap = $("#gap-input").val();
   const element = $("#final-graph")[0];
-  drawBarGraph(graphData, element);
+
+
+
+      drawBarGraph(graphData, element);
+
+
 })
 
 

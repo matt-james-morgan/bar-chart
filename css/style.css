@@ -5,7 +5,15 @@
   font-family: 'VT323', monospace;
   color: wheat;
 }
-
+body{
+  height: 100vh;
+}
+.swatch{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 1em 1em 1em rgba(0, 0, 0, .1);
+}
 
 #chart-name-div{
   display: flex;
@@ -22,14 +30,20 @@ header{
 
 header h1{
 
-  font-size: 10em;
+  font-size: 4em;
   margin: 0;
 
 }
-
 nav{
+  height: 100%;
+
+}
+
+form{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  justify-items: center;
 }
 
 
@@ -74,9 +88,49 @@ nav{
   width: 100%;
 }
 
+input[type='text'], input[type='number']{
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 1px wheat;
+  font-size: 2em;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  font-family: 'VT323', monospace;
+  display: block;
+
+}
+
+input[type='text']::placeholder, input[type='number']::placeholder{
+  color: wheat;
+}
+
+
 body{
   background-image: url('https://images.alphacoders.com/754/754565.png');
   background-repeat: no-repeat;
   background-size:cover;
   background-attachment: fixed;
+}
+
+label{
+  font-size: 2em;
+}
+#bar-input{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#enter-data{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.bar-input{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+input[type='color']{
+  border: none;
 }
