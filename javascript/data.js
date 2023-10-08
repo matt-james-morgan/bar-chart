@@ -7,15 +7,15 @@ let graphData = {
 
 }
 
-let barCountId = 1;
+
 
 $("#addBar").click((e)=>{
   e.preventDefault();
   const container = document.createElement("div")
   container.setAttribute("class", "bar-input");
-  barCountId++;
-  const paragraph1 = document.createElement("p");
-        paragraph1.textContent = "Enter Bar Value";
+
+  const label1 = document.createElement("label");
+        label1.textContent = "Bar Value";
 
         // Create input element for data
         const input1 = document.createElement("input");
@@ -23,64 +23,102 @@ $("#addBar").click((e)=>{
         input1.setAttribute("min", "1");
         input1.setAttribute("max", "100");
         input1.setAttribute("placeholder", "1");
-        input1.setAttribute("class", 'user-data')
+        input1.setAttribute("class", 'user-data');
+        input1.required = true;
 
-
-
-
+        const disclaimer = document.createElement("p");
+        disclaimer.append(document.createElement('em').innerHTML = "*Bar values are in percentage")
 
         // Create paragraph element for "Enter Bar Name"
-        const paragraph2 = document.createElement("p");
-        paragraph2.textContent = "Enter Bar Name and Color";
+
 
         // Create input element for bar name with min and max attributes
         const input2 = document.createElement("input");
         input2.setAttribute("type", "text");
-        input2.setAttribute("placeholder", "Bar Label");
+        input2.setAttribute("placeholder", "Enter Bar Label");
+
+        const colorDiv = document.createElement("div");
+        colorDiv.setAttribute("class","color-selector");
         const input3 = document.createElement("input");
         input3.setAttribute("type", "color");
+        input3.setAttribute("class", "color-input")
+        const barColor = document.createElement('label');
+        barColor.innerHTML = 'Bar Color:';
+        colorDiv.append(barColor);
+        colorDiv.append(input3)
 
-        const paragraph3 = document.createElement("p");
-        paragraph2.textContent = "Enter Bar Label Color";
+        const fontColorDiv = document.createElement("div");
         const input4 = document.createElement("input");
         input4.setAttribute("type", "color");
+        input4.setAttribute("class", "color-input");
+        const barFontColor = document.createElement("label");
+        barFontColor.innerHTML = "Bar Font Color:";
+
+        fontColorDiv.append(barFontColor);
+        fontColorDiv.append(input4);
 
 
         // Get the container element and append the generated elements to it
-        const div = document.getElementById("enter-data");
-        container.appendChild(paragraph1);
+        const div = $("#form");
+
+        container.appendChild(label1);
         container.appendChild(input1);
-        container.appendChild(paragraph2);
+        container.appendChild(disclaimer)
+
         container.appendChild(input2);
-        container.appendChild(input3);
-        container.appendChild(paragraph3);
-        container.appendChild(input4);
+        container.appendChild(colorDiv);
+        container.appendChild(fontColorDiv);
         div.append(container);
 })
 
-const drawBarGraph = (graphData, element) => {
+const drawBarGraph = (data, options, element) => {
+  $('nav').hide();
   $("#graph").css("display","grid");
-  const finalGraph = document.getElementById("final-graph");
-  const graphTitle = document.createElement("h2");
-  graphTitle.innerHTML = graphData.graphTitle;
-  graphTitle.style.fontSize = graphData.graphTitleSize+"px";
-  graphTitle.style.color = graphData.titleColor;
-  $("#graph").prepend(graphTitle);
+  const finalGraph = document.getElementById(element);
+  if(options.direction === '2'){
+    $("#y-axis").hide();
+    $("#x-axis").css("display", "flex");
+    $("x-axis").css("")
+    $("#graph").css("grid-template-rows","1fr 1fr 1fr");
+    $("#graph").css("grid-template-columns","1fr");
+    $("#x-axis").css("flex-direction", "row");
+    $("#final-graph").css("grid-row-start", "3")
+    for(let i = 0; i < data.length; i++){
+      const bar = document.createElement('div');
+      const label = document.createElement('p');
+      label.innerHTML = options.barLabelName[i];
+      bar.style.width = data[i] + "%";
+      bar.style.backgroundColor = options.barColor[i];
+      bar.style.display = "flex";
+      bar.style.justifyContent = 'center';
+      bar.append(label);
+      finalGraph.append(bar);
 
-  for(let i = 0; i < graphData.data.length; i++){
-    const bar = document.createElement('div');
-    const label = document.createElement('p');
-    label.innerHTML = graphData.barLabelName[i];
-    bar.style.height = graphData.data[i] + "%";
-    bar.style.backgroundColor = graphData.barColor[i];
-    bar.style.display = "flex";
-    bar.style.justifyContent = 'center';
-    bar.appendChild(label);
-    finalGraph.appendChild(bar);
+    }
+  }else{
+    for(let i = 0; i < data.length; i++){
+      const bar = document.createElement('div');
+      const label = document.createElement('p');
+      label.innerHTML = options.barLabelName[i];
+      bar.style.height = data[i] + "%";
+      bar.style.backgroundColor = options.barColor[i];
+      bar.style.display = "flex";
+      bar.style.justifyContent = 'center';
+      bar.append(label);
+      finalGraph.append(bar);
 
+    }
   }
 
-  finalGraph.style.gap = graphData.barGap + "%";
+  const graphTitle = document.createElement("h2");
+  graphTitle.innerHTML = options.graphTitle;
+  graphTitle.style.fontSize = options.graphTitleSize+"px";
+  graphTitle.style.color = options.titleColor;
+  $("#graph").prepend(graphTitle);
+
+
+
+  finalGraph.style.gap = options.barGap + "%";
 
 }
 
@@ -104,129 +142,13 @@ $("#form").on("click", "#submit", (e)=>{
   graphData.titleColor = $("#title-color").val();
   graphData.graphTitleSize = $("#graph-title-size").val();
   graphData.barGap = $("#gap-input").val();
-  const element = $("#final-graph")[0];
+  graphData.direction = $("#direction").val();
 
 
 
-      drawBarGraph(graphData, element);
+      drawBarGraph(graphData.data,graphData, 'final-graph');
 
 
 })
 
 
-/*
-const checkDataForString = (data) => {
-    return data.some(isNaN);
-}
-
-const assignData =  (callback) => {
-    let validInput = false;
-    while(!validInput){
-
-            data = $("#data").val().replace(/\s/g, '').split(',').map((x) => {
-                return parseInt(x);
-            });
-            if(checkDataForString(data)){
-                console.log(data);
-                alert('Please fill out form');
-                return;
-            }else{
-                graphData.data = data;
-                validInput = true;
-                callback();
-            }
-
-    }
-
-}
-
-const drawBarGraph = (graphData, element) => {
-    const sortedData = graphData.data.sort();
-    if(sortedData[sortedData.length-1] <= 10){
-        for(let val of sortedData){
-          $("#y-axis").append(document.createElement("div").innerHTML = val);
-        }
-    }else if(sortedData[sortedData.length-1] <= 900){
-        $("#y-axis").html(Math.round(sortedData[graphData.data.length-1]/100)*100);
-    }
-}
-
-//on click event to assign values to Graph Data object
-$("#chart-name-submit").click((e) => {
-    graphData.title = $("#graph-title").val();
-    graphData.titleColor = $("#title-color").val();
-    graphData.titleSize = $("#graph-title-size").val();
-    if (!graphData.title) {//catches error if user hasn't filled out form
-        e.preventDefault();
-        alert('Please fill out form');
-    } else {
-        e.preventDefault(); //displays next section
-        $("#chart-name-div").hide();
-        $("#enter-data").show();
-    }
-});
-
-const generateBarColorInput = () => {
-    const div = document.createElement('div');
-    const input = document.createElement('input');
-    input.type = "submit";
-    input.id = "bar-color-submit";
-    graphData.data.map((x, i) => {//mapping each piece of data to generate new color option for each bar
-        const label = document.createElement('label');
-        const barColor = document.createElement('input');
-        const barName = document.createElement('input');
-        label.innerHTML = 'Bar ' + (i + 1);
-        barName.type = "text";
-        barName.placeholder = "Bar Name";
-        barName.id = "bar-name-" + i;
-        barColor.type = 'color';
-        barColor.id = "bar-color-" + i;
-        div.append(label, barName, barColor);
-    });
-
-
-
-    $("#assign-bar-color").append(div);
-    $('#assign-bar-color').append(input)
-};
-
-
-$("#data-submit").click( (e) => {
-
-    assignData(()=>{
-        e.preventDefault();
-        $("#enter-data").hide();
-        generateBarColorInput();
-        $("#assign-bar-color").show();
-
-    });
-});
-
-
- $(document).on("click", "#bar-color-submit", (e) => {
-
-    for (let i = 0; i < graphData.data.length; i++) {
-        if (!$('#bar-name-' + i).val()) {
-            e.preventDefault();
-            alert('Please fill out form');
-            break;
-        } else {
-            graphData.barColor.push($('#bar-color-' + i).val());
-            graphData.barName.push($('#bar-name-' + i).val());
-            $("#assign-bar-color").hide();
-            $("#assign-gap").show();
-        }
-    }
- });
-
- $("#gap-submit").click(()=>{
-    if(!$("#gap-input").val()){
-        e.preventDefault();
-        alert('Please select option');
-    }else{
-        graphData.barGap = $("#gap-input").val();
-        $("#assign-gap").hide();
-        drawBarGraph(graphData, $("#graph"));
-    }
- })
-*/

@@ -4,21 +4,20 @@
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
   font-family: 'VT323', monospace;
   color: wheat;
+  box-sizing: border-box;
 }
 body{
-  height: 100vh;
+  height: auto;
 }
-.swatch{
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  box-shadow: 1em 1em 1em rgba(0, 0, 0, .1);
-}
+
+
+
 
 #chart-name-div{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
 
 }
 
@@ -31,17 +30,17 @@ header{
 header h1{
 
   font-size: 4em;
-  margin: 0;
+  margin: 50px;
 
 }
 nav{
-  height: 100%;
+  height: auto;
 
 }
 
 form{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   height: 100%;
   justify-items: center;
 }
@@ -54,13 +53,14 @@ form{
 #graph {
   display: none;
   grid-template-columns: 1fr 9fr;
-  grid-template-rows: auto 1fr 1fr;
+
 }
 
 #x-axis{
+  display: flex;
   grid-column-start: span 2;
   display: none;
-
+  align-items: flex-start;
 }
 #y-axis{
   flex-direction: column;
@@ -68,7 +68,7 @@ form{
 }
 
 #x-axis, #y-axis{
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 #graph h2{
@@ -96,6 +96,7 @@ input[type='text'], input[type='number']{
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
   font-family: 'VT323', monospace;
   display: block;
+  width: 100%;
 
 }
 
@@ -105,8 +106,7 @@ input[type='text']::placeholder, input[type='number']::placeholder{
 
 
 body{
-  background-image: url('https://images.alphacoders.com/754/754565.png');
-  background-repeat: no-repeat;
+  background-image: url("http://gseii.org/site/wp-content/uploads/2014/05/blue-gradient-wallpaper.jpg");
   background-size:cover;
   background-attachment: fixed;
 }
@@ -114,23 +114,84 @@ body{
 label{
   font-size: 2em;
 }
-#bar-input{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
+
 
 #enter-data{
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+
+
+
 }
 .bar-input{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  height: 100%;
 }
 
-input[type='color']{
+.color-input{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border: none;
+  background-color: transparent;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+}
+
+.color-input::-webkit-color-swatch{
+  border-radius: 100%;
+  border: 1px wheat solid;
+}
+
+.color-selector{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+label{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#graph-font-size{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+select{
+  background: none;
+  border: none;
+  font-size: 1.6em;
+}
+
+#submit{
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  background: none;
+  background-color: wheat;
+  border: solid wheat 1px;
+  transition: all 0.3s ease;
+  color: black;
+  font-size: 2em;
+  text-shadow: none;
+
+}
+
+#submit:hover{
+  box-shadow: 5px 5px 5px black;
+}
+
+.bar-input > *{
+  margin: 4% 0;
+}
+
+#submit {
+  align-self: center;
 }

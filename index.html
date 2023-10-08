@@ -1,121 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar Chart</title>
     <link rel="stylesheet" href="./css/style.css">
 
 
-</head>
-<body>
+  </head>
+
+  <body>
     <header>
-        <h1>BarBeat Pro: Crafting Graphical Soundscapes</h1>
+      <h1>BarBeat Pro: Crafting Graphical Soundscapes</h1>
     </header>
     <nav>
       <form id="form">
+
         <div id="chart-name-div">
 
 
-                <input type="text" id="graph-title" placeholder="Graph Title" required>
-                <div>
-                  <label for="">Graph Title Color:</label>
-                <input type="color" id="title-color">
-                </div>
+          <input type="text" id="graph-title" placeholder="Graph Title" required>
+          <div class="color-selector">
+            <label for="">Graph Title Color:</label>
+            <input type="color" id="title-color" class="color-input">
+          </div>
 
 
 
-
-                <label>Graph Title Font Size
-                    <select id="graph-title-size" name="Graph-title-size">
-                        <option value="8">8</option>
-                        <option value="10">10</option>
-                        <option value="12">12</option>
-                        <option value="14">14</option>
-                        <option value="16">16</option>
-                        <option value="18">18</option>
-                        <option value="20">20</option>
-                        <option value="24">24</option>
-                        <option value="26">26</option>
-                        <option value="28">28</option>
-                    </select>
-                </label>
-
-
-
+          <div id="graph-font-size">
+            <label>Graph Title Font Size:</label>
+            <select id="graph-title-size" name="Graph-title-size">
+              <option value="8">8</option>
+              <option value="10">10</option>
+              <option value="12">12</option>
+              <option value="14">14</option>
+              <option value="16">16</option>
+              <option value="18">18</option>
+              <option value="20">20</option>
+              <option value="24">24</option>
+              <option value="26">26</option>
+              <option value="28">28</option>
+            </select>
+          </div>
+          <div>
+            <label>Bar Gap Percentage</label>
+            <input type="number" min="1" max="20" id="gap-input" placeholder="1">
+          </div>
+        <div>
+          <label>Direction:</label>
+          <select id="direction">
+            <option value="1">Vertical</option>
+            <option value="2">Horizontal</option>
+          </select>
+        </div>
 
         </div>
 
 
 
 
-            <div id="enter-data">
-            <div class="bar-input">
-              <label>Bar Value</label>
-              <input type="number" min="1" max="100" required placeholder="1" class="user-data">
-              <p><em>*Bar values are in percentage</em></p>
-              <input type="text" placeholder="Bar Label">
-              <input type="color">
-              <label>Enter Bar Label Color</label>
-              <input type="color">
-              <p>Enter percetage for bar gap</p>
-              <input type="number" min="1" max="20" id="gap-input">
-
-                <h2>Add Another Bar</h2>
-                <button id="addBar">+</button>
+        <div id="enter-data">
+          <div class="bar-input">
+            <label>Bar Value</label>
+            <input type="number" min="1" max="100" required placeholder="1" class="user-data">
+            <p><em>*Bar values are in percentage</em></p>
+            <input type="text" placeholder="Enter Bar Label">
+            <div class="color-selector">
+              <label>Bar Color:</label>
+              <input type="color" class="color-input">
             </div>
-
+            <div class="color-selector">
+              <label>Bar Font Color:</label>
+              <input type="color" class="color-input">
 
             </div>
 
+            <div>
+              <label>Add Another Bar</label>
+              <button id="addBar">+</button>
+            </div>
+
+          </div>
 
 
-
-
-
-
-
+        </div>
 
 
         <input type="submit" id="submit">
+
       </form>
     </nav>
-    <div id = "graph">
-        <div id="y-axis">
-          <p>100</p>
-          <p>90</p>
-          <p>80</p>
-          <p>70</p>
-          <p>60</p>
-          <p>50</p>
-          <p>40</p>
-          <p>30</p>
-          <p>20</p>
-          <p>10</p>
-          <p>0</p>
-        </div>
-        <div id="final-graph">
+    <div id="graph">
+      <div id="x-axis">
+        <p>0</p>
+        <p>10</p>
+        <p>20</p>
+        <p>30</p>
+        <p>40</p>
+        <p>50</p>
+        <p>60</p>
+        <p>70</p>
+        <p>80</p>
+        <p>90</p>
+        <p>100</p>
+      </div>
+      <div id="y-axis">
+        <p>100</p>
+        <p>90</p>
+        <p>80</p>
+        <p>70</p>
+        <p>60</p>
+        <p>50</p>
+        <p>40</p>
+        <p>30</p>
+        <p>20</p>
+        <p>10</p>
+        <p>0</p>
+      </div>
+      <div id="final-graph">
 
-        </div>
-        <div id="x-axis">
+      </div>
 
-          <p>10</p>
-          <p>20</p>
-          <p>30</p>
-          <p>40</p>
-          <p>50</p>
-          <p>60</p>
-          <p>70</p>
-          <p>80</p>
-          <p>90</p>
-          <p>100</p>
-        </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="./javascript/data.js"></script>
+  </body>
 
-</body>
-<script
-    src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-    crossorigin="anonymous"></script>
-<script src="./javascript/data.js"></script>
-</html>
+
+  </html>
