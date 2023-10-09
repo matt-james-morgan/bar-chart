@@ -15,12 +15,11 @@
       <h1>BarBeat Pro: Crafting Graphical Soundscapes</h1>
     </header>
     <nav>
+
       <form id="form">
 
         <div id="chart-name-div">
-
-
-          <input type="text" id="graph-title" placeholder="Graph Title" required>
+          <input type="text" id="graph-title" placeholder="Graph Title" required/>
           <div class="color-selector">
             <label for="">Graph Title Color:</label>
             <input type="color" id="title-color" class="color-input">
@@ -43,10 +42,10 @@
               <option value="28">28</option>
             </select>
           </div>
-          <div>
+        <div id="bar-gap">
             <label>Bar Gap Percentage</label>
-            <input type="number" min="1" max="20" id="gap-input" placeholder="1">
-          </div>
+            <input type="number" min="1" max="20" id="gap-input" placeholder="1" value="1">
+        </div>
         <div>
           <label>Direction:</label>
           <select id="direction">
@@ -62,8 +61,7 @@
 
         <div id="enter-data">
           <div class="bar-input">
-            <label>Bar Value</label>
-            <input type="number" min="1" max="100" required placeholder="1" class="user-data">
+            <input type="number" min="1" max="100" required placeholder="Bar Value" class="user-data"/>
             <p><em>*Bar values are in percentage</em></p>
             <input type="text" placeholder="Enter Bar Label">
             <div class="color-selector">
@@ -76,18 +74,19 @@
 
             </div>
 
-            <div>
-              <label>Add Another Bar</label>
-              <button id="addBar">+</button>
-            </div>
 
           </div>
 
 
         </div>
 
+        <div id="final-form">
+          <label>Add Another Bar</label>
+          <button id="addBar">+</button>
+          <input type="submit" id="submit">
+        </div>
 
-        <input type="submit" id="submit">
+
 
       </form>
     </nav>
@@ -118,14 +117,16 @@
         <p>10</p>
         <p>0</p>
       </div>
-      <div id="final-graph">
 
+      <div id="final-graph">
       </div>
 
     </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="./javascript/data.js"></script>
+
   </body>
 
 

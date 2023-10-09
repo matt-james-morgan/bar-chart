@@ -1,16 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Young+Serif&display=swap');
 
 *{
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-  font-family: 'VT323', monospace;
+ font-family: 'Young Serif', serif;
   color: wheat;
   box-sizing: border-box;
+  height: 100%;
 }
 body{
   height: auto;
 }
+.graph-p-tag{
+  height: 20px;
+  margin: 5% 0 0 10%;
+}
+.h-graph-p-tag{
+  margin: 0;
+}
+p{
 
+  margin-block-start: 0;
+    margin-block-end: 0;
+  margin-top: 19%;
 
+}
+#bar-gap{
+  display: grid;
+}
+#bar-gap label{
+  justify-self: start;
+}
+
+#final-form{
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+}
+
+button{
+  text-align: center;
+}
+
+#regen-button{
+  width: fit-content;
+}
 
 
 #chart-name-div{
@@ -25,17 +60,22 @@ header{
   display: flex;
   justify-content: center;
   width: 100%;
+  align-items: center;
+  flex-direction: column;
 }
 
 header h1{
 
-  font-size: 4em;
-  margin: 50px;
+  font-size: 2.8em;
+  margin: 30px;
 
 }
 nav{
   height: auto;
 
+}
+#test-form{
+  display: block;
 }
 
 form{
@@ -54,6 +94,7 @@ form{
   display: none;
   grid-template-columns: 1fr 9fr;
 
+
 }
 
 #x-axis{
@@ -61,6 +102,9 @@ form{
   grid-column-start: span 2;
   display: none;
   align-items: flex-start;
+}
+#x-axis p{
+  margin: 0;
 }
 #y-axis{
   flex-direction: column;
@@ -86,6 +130,7 @@ form{
 #final-graph div{
   margin-top: auto;
   width: 100%;
+  margin-bottom: 1.8%;
 }
 
 input[type='text'], input[type='number']{
@@ -94,7 +139,7 @@ input[type='text'], input[type='number']{
   border-bottom: solid 1px wheat;
   font-size: 2em;
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-  font-family: 'VT323', monospace;
+
   display: block;
   width: 100%;
 
@@ -112,7 +157,8 @@ body{
 }
 
 label{
-  font-size: 2em;
+  font-size: 1.6em;
+  height: auto;
 }
 
 
@@ -170,21 +216,22 @@ select{
   font-size: 1.6em;
 }
 
-#submit{
+#submit, button{
   cursor: pointer;
-  width: 100px;
+  width: 150px;
   height: 50px;
   background: none;
   background-color: wheat;
   border: solid wheat 1px;
   transition: all 0.3s ease;
-  color: black;
+  color: darkred;
   font-size: 2em;
   text-shadow: none;
+  border: solid black 1px
 
 }
 
-#submit:hover{
+#submit:hover, button:hover{
   box-shadow: 5px 5px 5px black;
 }
 

@@ -7,22 +7,56 @@ let graphData = {
 
 }
 
+const regen = () => {
+  const bars = document.querySelectorAll("#final-graph > div");
+  const resetInputDiv = document.querySelectorAll(".bar-input");
+  const resetUserDataInput = document.querySelectorAll(".user-data");
+  const resetBarColors = document.querySelectorAll(".color-input");
+  $("#graph-title").val($("#graph-title").attr("placeholder"));
+  $("#title-color").val("#000000");
+  $("#graph > h2").remove();
+  resetBarColors.forEach(colorInput => {
+    colorInput.value = "#000000";
+  });
 
+  resetUserDataInput[0].value = resetUserDataInput[0].ariaPlaceholder;
+  for(let i=0; i < bars.length; i++){
+    bars[i].remove();
+  }
+  for(let i=1; i < resetInputDiv.length; i++){
+    resetInputDiv[i].remove();
+  }
+
+  graphData.barColor = [];
+  graphData.barLabelColor = [];
+  graphData.data = [];
+  graphData.barName = [];
+  graphData.barLabelName = [];
+  graphData.graphTitle =  '';
+  graphData.graphTitleSize = '';
+  graphData.titleColor = '';
+  graphData.direction = '';
+  graphData.barGap = '';
+
+  $("nav").show();
+  $("#graph").hide();
+  $("#regen-button").remove();
+
+}
 
 $("#addBar").click((e)=>{
   e.preventDefault();
   const container = document.createElement("div")
   container.setAttribute("class", "bar-input");
 
-  const label1 = document.createElement("label");
-        label1.textContent = "Bar Value";
+
 
         // Create input element for data
         const input1 = document.createElement("input");
         input1.setAttribute("type", "number");
         input1.setAttribute("min", "1");
         input1.setAttribute("max", "100");
-        input1.setAttribute("placeholder", "1");
+        input1.setAttribute("placeholder", "Enter Bar Value");
         input1.setAttribute("class", 'user-data');
         input1.required = true;
 
@@ -61,7 +95,7 @@ $("#addBar").click((e)=>{
         // Get the container element and append the generated elements to it
         const div = $("#form");
 
-        container.appendChild(label1);
+
         container.appendChild(input1);
         container.appendChild(disclaimer)
 
@@ -75,28 +109,39 @@ const drawBarGraph = (data, options, element) => {
   $('nav').hide();
   $("#graph").css("display","grid");
   const finalGraph = document.getElementById(element);
+  const regenButton = document.createElement("button");
+  regenButton.id = 'regen-button';
+  regenButton.innerHTML = "Regenrate";
+  $('header').on("click", "#regen-button", (e)=>{
+    e.preventDefault()
+   regen();
+  });
+  $("header").append(regenButton);
   if(options.direction === '2'){
+    finalGraph.style.display = 'grid';
+
     $("#y-axis").hide();
     $("#x-axis").css("display", "flex");
-    $("x-axis").css("")
-    $("#graph").css("grid-template-rows","1fr 1fr 1fr");
+    $("#graph").css("grid-template-rows","auto auto 1fr");
     $("#graph").css("grid-template-columns","1fr");
     $("#x-axis").css("flex-direction", "row");
     $("#final-graph").css("grid-row-start", "3")
     for(let i = 0; i < data.length; i++){
       const bar = document.createElement('div');
       const label = document.createElement('p');
+      label.classList.add("h-graph-p-tag");
       label.innerHTML = options.barLabelName[i];
       bar.style.width = data[i] + "%";
       bar.style.backgroundColor = options.barColor[i];
       bar.style.display = "flex";
       bar.style.justifyContent = 'center';
+
       bar.append(label);
       finalGraph.append(bar);
-
     }
   }else{
     for(let i = 0; i < data.length; i++){
+
       const bar = document.createElement('div');
       const label = document.createElement('p');
       label.innerHTML = options.barLabelName[i];
@@ -104,6 +149,7 @@ const drawBarGraph = (data, options, element) => {
       bar.style.backgroundColor = options.barColor[i];
       bar.style.display = "flex";
       bar.style.justifyContent = 'center';
+      bar.style.alignItems = "flex-start"
       bar.append(label);
       finalGraph.append(bar);
 
@@ -124,29 +170,37 @@ const drawBarGraph = (data, options, element) => {
 
 $("#form").on("click", "#submit", (e)=>{
   e.preventDefault();
+  let isValid = true;
   const bars = $(".bar-input");
   bars.each(function(){
-    if($(this).find("input[type=number]").val() > 100){
-      alert('val cant be more than 100');
+
+    if($(this).find("input[type=number]").val() > 100 || !$(this).find("input[type='number']").val() || $(this).find("input[type=number]").val() <= 0){
+      alert('Bar Value has to be between 1-100');
+      isValid = false;
     }else{
       graphData.data.push($(this).find("input[type='number']").val());
       console.log(graphData.data);
       console.log(bars)
     }
 
-     graphData.barLabelName.push($(this).find("input[type='text']").val());
-     graphData.barColor.push($(this).find("input[type=color]").eq(0).val());
-     graphData.barLabelColor.push($(this).find("input[type=color]").eq(1).val());
-  })
-  graphData.graphTitle = $("#graph-title").val();
-  graphData.titleColor = $("#title-color").val();
-  graphData.graphTitleSize = $("#graph-title-size").val();
-  graphData.barGap = $("#gap-input").val();
-  graphData.direction = $("#direction").val();
+    if(isValid){
+      graphData.barLabelName.push($(this).find("input[type='text']").val());
+      graphData.barColor.push($(this).find("input[type=color]").eq(0).val());
+      graphData.barLabelColor.push($(this).find("input[type=color]").eq(1).val());
+    }
 
+  });
 
+  if(isValid){
 
-      drawBarGraph(graphData.data,graphData, 'final-graph');
+    graphData.graphTitle = $("#graph-title").val();
+    graphData.graphTitleSize = $("#graph-title-size").val();
+    graphData.titleColor = $("#title-color").val();
+    graphData.direction = $("#direction").val();
+    graphData.barGap = $("#gap-input").val();
+
+    drawBarGraph(graphData.data,graphData, 'final-graph');
+  }
 
 
 })
