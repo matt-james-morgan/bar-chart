@@ -13,7 +13,11 @@ const regen = () => {
   const resetUserDataInput = document.querySelectorAll(".user-data");
   const resetBarColors = document.querySelectorAll(".color-input");
   $("#graph-title").val($("#graph-title").attr("placeholder"));
+  $("#gap-input").val($("#gap-input").attr("placeholder"));
+  $('input[type=text]').val($('input[type=text]').attr("placeholder"));
+  $('#direction').val()
   $("#title-color").val("#000000");
+  $('#graph-title-size').val('8');
   $("#graph > h2").remove();
   resetBarColors.forEach(colorInput => {
     colorInput.value = "#000000";
@@ -168,7 +172,7 @@ const drawBarGraph = (data, options, element) => {
 
 }
 
-$("#form").on("click", "#submit", (e)=>{
+$("#submit").click((e)=>{
   e.preventDefault();
   let isValid = true;
   const bars = $(".bar-input");
